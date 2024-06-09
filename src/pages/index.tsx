@@ -30,21 +30,45 @@ const Home = () => {
 
     for (const direction of directions) {
       const [dx, dy] = direction;
-      if (
-        board[y + dy] !== undefined &&
-        board[y + dy][x + dx] !== undefined &&
-        board[y + dy][x + dx] === 2 / turnColor
-      ) {
-        let i = y - dy;
-        while (i >= 0 && board[i] !== undefined && board[i][x] === 2 / turnColor) {
-          newBoard[i][x] = turnColor;
-          i--;
-        }
-        newBoard[y][x] = turnColor;
-        if (newBoard[y][x] === turnColor) {
-          setTurnColor(2 / turnColor);
+      let X = x + dx;
+      let Y = y + dy;
+      let oppoment = false;
+
+      // if (
+      //   board[y + dy] !== undefined &&
+      //   board[y + dy][x + dx] !== undefined &&
+      //   board[y + dy][x + dx] === 2 / turnColor //もしその方向がundefindでないかつその方向が相手の色
+      // ) {
+      while (board[Y] !== undefined && board[Y][X] !== undefined) {
+        if (board[Y][X] === 2 / turnColor) {
+          oppoment = true;
+          X += dx;
+          Y += dy;
+        } else if (board[Y][X] === turnColor) {
+          if (oppoment) {
+            let changeX = x + dx;
+            let changeY = y + dy;
+            while (changeX !== X || changeY !== Y) {
+              newBoard[Y][X] = turnColor;
+              changeX += dx;
+              changeY = dy;
+            }
+            newBoard[y][x] = turnColor;
+            setTurnColor(2 / turnColor);
+          }
+          break;
+        } else {
+          break;
         }
       }
+      //     newBoard[y][x] = turnColor;
+      //   } //上記の方向が定義されてる間かつ相手の色の間自分の色の時→終わり自分の色がこないままundefindのとき→置けないにしたい
+      //   newBoard[y][x] = turnColor;
+      //   if (newBoard[y][x] === turnColor) {
+      //     setTurnColor(2 / turnColor); //白黒順番交代
+      //   }
+      // }
+
       //     //上下左右確認
 
       //     if (board[y + 1] !== undefined && board[y + 1][x] === 2 / turnColor) {
