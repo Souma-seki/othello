@@ -49,7 +49,7 @@ const Home = () => {
             let changeX = x + dx;
             let changeY = y + dy;
             while (changeX !== X || changeY !== Y) {
-              newBoard[Y][X] = turnColor;
+              newBoard[changeY][changeX] = turnColor;
               changeX += dx;
               changeY += dy;
             }
@@ -64,9 +64,9 @@ const Home = () => {
       //     newBoard[y][x] = turnColor;
       //   } //上記の方向が定義されてる間かつ相手の色の間自分の色の時→終わり自分の色がこないままundefindのとき→置けないにしたい
       //   newBoard[y][x] = turnColor;
-      if (newBoard[y][x] === turnColor) {
-        setTurnColor(2 / turnColor); //白黒順番交代
-      }
+      // if (newBoard[y][x] === turnColor) {
+      //   setTurnColor(2 / turnColor); //白黒順番交代
+      // }
       // }
     }
     setboard(newBoard);
