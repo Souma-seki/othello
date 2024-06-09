@@ -14,6 +14,7 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0],
   ]);
   const clickHandler = (x: number, y: number) => {
+    if (board[y][x] !== 0) return;
     console.log(x, y);
     const newBoard = structuredClone(board);
 
@@ -28,17 +29,13 @@ const Home = () => {
       [-1, -1], // 左上
     ];
 
+    //８方向を確認してひっくり返す
+
     for (const direction of directions) {
       const [dx, dy] = direction;
       let X = x + dx;
       let Y = y + dy;
       let oppoment = false;
-
-      // if (
-      //   board[y + dy] !== undefined &&
-      //   board[y + dy][x + dx] !== undefined &&
-      //   board[y + dy][x + dx] === 2 / turnColor //もしその方向がundefindでないかつその方向が相手の色
-      // ) {
       while (board[Y] !== undefined && board[Y][X] !== undefined) {
         if (board[Y][X] === 2 / turnColor) {
           oppoment = true;
@@ -61,20 +58,23 @@ const Home = () => {
           break;
         }
       }
-      //     newBoard[y][x] = turnColor;
-      //   } //上記の方向が定義されてる間かつ相手の色の間自分の色の時→終わり自分の色がこないままundefindのとき→置けないにしたい
-      //   newBoard[y][x] = turnColor;
-      // if (newBoard[y][x] === turnColor) {
-      //   setTurnColor(2 / turnColor); //白黒順番交代
-      // }
-      // }
     }
     setboard(newBoard);
   };
 
-  console.table(board);
+  const countStones = (board) => {
+    let black = 0;
+    let white = 0;
 
-  // setboard(newBoard);
+    for (const row of board) {
+      for (const cell of row) {
+        if (cell === 1) black++;
+        if (cell === 2) white++;
+      }
+    }
+    return { black, white };
+  };
+  const { black, white } = countStones(board);
 
   return (
     <div className={styles.container}>
@@ -91,6 +91,13 @@ const Home = () => {
             </div>
           )),
         )}
+      </div>
+      <div className={styles.scoreBoard}>
+        <p>黒:{black}</p>
+        <p>白:{white}</p>
+      </div>
+      <div className={styles.turn}>
+        <p>{turnColor === 1 ? '黒' : '白'}のターン</p>
       </div>
     </div>
   );
