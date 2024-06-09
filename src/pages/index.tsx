@@ -51,7 +51,7 @@ const Home = () => {
             while (changeX !== X || changeY !== Y) {
               newBoard[Y][X] = turnColor;
               changeX += dx;
-              changeY = dy;
+              changeY += dy;
             }
             newBoard[y][x] = turnColor;
             setTurnColor(2 / turnColor);
@@ -64,85 +64,10 @@ const Home = () => {
       //     newBoard[y][x] = turnColor;
       //   } //上記の方向が定義されてる間かつ相手の色の間自分の色の時→終わり自分の色がこないままundefindのとき→置けないにしたい
       //   newBoard[y][x] = turnColor;
-      //   if (newBoard[y][x] === turnColor) {
-      //     setTurnColor(2 / turnColor); //白黒順番交代
-      //   }
+      if (newBoard[y][x] === turnColor) {
+        setTurnColor(2 / turnColor); //白黒順番交代
+      }
       // }
-
-      //     //上下左右確認
-
-      //     if (board[y + 1] !== undefined && board[y + 1][x] === 2 / turnColor) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-      //     if (board[y - 1] !== undefined && board[y - 1][x] === 2 / turnColor) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-
-      //     if (board[x + 1] !== undefined && board[y][x + 1] === 2 / turnColor) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-      //     if (board[x - 1] !== undefined && board[y][x - 1] === 2 / turnColor) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-
-      //     // 右上が相手の色かつ盤上
-      //     if (
-      //       board[y - 1] !== undefined &&
-      //       board[y - 1][x + 1] !== undefined &&
-      //       board[y - 1][x + 1] === 2 / turnColor
-      //     ) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-      //     // 右下が相手の色かつ盤上
-      //     if (
-      //       board[y + 1] !== undefined &&
-      //       board[y + 1][x + 1] !== undefined &&
-      //       board[y + 1][x + 1] === 2 / turnColor
-      //     ) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-
-      //     // 左上が相手の色かつ盤上
-      //     if (
-      //       board[y - 1] !== undefined &&
-      //       board[y - 1][x - 1] !== undefined &&
-      //       board[y - 1][x - 1] === 2 / turnColor
-      //     ) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
-
-      //     // 左下が相手の色かつ盤上
-      //     if (
-      //       board[y + 1] !== undefined &&
-      //       board[y + 1][x - 1] !== undefined &&
-      //       board[y + 1][x - 1] === 2 / turnColor
-      //     ) {
-      //       newBoard[y][x] = turnColor;
-      //       if (newBoard[y][x] === turnColor) {
-      //         setTurnColor(2 / turnColor);
-      //       }
-      //     }
     }
     setboard(newBoard);
   };
@@ -151,35 +76,6 @@ const Home = () => {
 
   // setboard(newBoard);
 
-  // // 上下のマスが相手の色の場合、自分の色に変更する関数
-  //   const flipVertical = (y: number, x: number) => {
-  //     // 上方向をチェックして色を変更
-  //     let i = y - 1;
-  //     while (i >= 0 && board[i] !== undefined && board[i][x] === 2 / turnColor) {
-  //       newBoard[i][x] = turnColor;
-  //       i--;
-  //     }
-
-  //     // 下方向をチェックして色を変更
-  //     i = y + 1;
-  //     while (i < board.length && board[i] !== undefined && board[i][x] === 2 / turnColor) {
-  //       newBoard[i][x] = turnColor;
-  //       i++;
-  //     }
-  //   };
-
-  //   // オセロボードを更新するメインの部分
-  //   if (board[y + 1] !== undefined && board[y + 1][x] === 2 / turnColor) {
-  //     newBoard[y][x] = turnColor;
-  //     flipVertical(y, x);
-  //   }
-  //   if (board[y - 1] !== undefined && board[y - 1][x] === 2 / turnColor) {
-  //     newBoard[y][x] = turnColor;
-  //     flipVertical(y, x);
-  //   }
-
-  //   setboard(newBoard);
-  // };
   return (
     <div className={styles.container}>
       <div className={styles.boardStyle}>
