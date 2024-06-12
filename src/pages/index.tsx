@@ -28,7 +28,9 @@ const Home = () => {
   const newBoard = structuredClone(board);
 
   // 候補地を３に設定する
+  const [passCount, setPassCount] = useState(0);
   const choice = (nowTurnColor: number) => {
+    let pass = 0;
     for (let y = 0; y < newBoard.length; y++) {
       for (let x = 0; x < newBoard[y].length; x++) {
         if (newBoard[y][x] !== 1 && newBoard[y][x] !== 2) {
@@ -53,9 +55,23 @@ const Home = () => {
               }
             }
           }
-          newBoard[y][x] = choicePrace ? 3 : 0;
-          setboard(newBoard);
+          if (choicePrace) {
+            newBoard[y][x] = 3;
+            pass++;
+          } else {
+            newBoard[y][x] = 0;
+            setboard(newBoard);
+          }
         }
+      }
+    }
+    if (pass === 0) {
+      const nextTurnColor = 2 / nowTurnColor;
+      setPassCount((PASS) => PASS + 1);
+      setTurnColor(nextTurnColor);
+      choice(nextTurnColor);
+      if (passCount + 1 >= 2) {
+        alert('ゲーム終了');
       }
     }
   };
@@ -128,7 +144,6 @@ const Home = () => {
           )),
         )}
       </div>
-
       <div className={styles.scoreBoard}>
         <p>黒:{black}</p>
         <p>白:{white}</p>
