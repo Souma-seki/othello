@@ -28,7 +28,7 @@ const Home = () => {
   const newBoard = structuredClone(board);
 
   // 候補地を３に設定する
-  const choice = () => {
+  const choice = (nowTurnColor: number) => {
     for (let y = 0; y < newBoard.length; y++) {
       for (let x = 0; x < newBoard[y].length; x++) {
         if (newBoard[y][x] !== 1 && newBoard[y][x] !== 2) {
@@ -39,11 +39,11 @@ const Home = () => {
             let preY = y + dy;
             let opponent = false;
             while (newBoard[preY] !== undefined && newBoard[preX] !== undefined) {
-              if (newBoard[preY][preX] === 2 / turnColor) {
+              if (newBoard[preY][preX] === 2 / nowTurnColor) {
                 opponent = true;
                 preX += dx;
                 preY += dy;
-              } else if (newBoard[preY][preX] === turnColor) {
+              } else if (newBoard[preY][preX] === nowTurnColor) {
                 if (opponent) {
                   choicePrace = true;
                 }
@@ -93,8 +93,8 @@ const Home = () => {
         }
       }
     }
-
-    choice();
+    setTurnColor(2 / turnColor);
+    choice(2 / turnColor);
   };
 
   // 各石の数を数える
