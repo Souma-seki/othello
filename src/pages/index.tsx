@@ -25,9 +25,10 @@ const Home = () => {
     [-1, -1], // 左上
   ];
 
+  const newBoard = structuredClone(board);
+
   // 候補地を３に設定する
   const choice = () => {
-    const newBoard = structuredClone(board);
     for (let y = 0; y < newBoard.length; y++) {
       for (let x = 0; x < newBoard[y].length; x++) {
         if (newBoard[y][x] !== 1 && newBoard[y][x] !== 2) {
@@ -53,16 +54,15 @@ const Home = () => {
             }
           }
           newBoard[y][x] = choicePrace ? 3 : 0;
+          setboard(newBoard);
         }
       }
     }
-    setboard(newBoard);
   };
 
   const clickHandler = (x: number, y: number) => {
-    if (board[y][x] !== 0 && board[y][x] !== 3) return;
+    if (board[y][x] !== 3) return;
     console.log(x, y);
-    const newBoard = structuredClone(board);
 
     //８方向を確認してひっくり返す
     for (const direction of directions) {
@@ -93,7 +93,7 @@ const Home = () => {
         }
       }
     }
-    setboard(newBoard);
+
     choice();
   };
 

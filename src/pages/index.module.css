@@ -31,9 +31,9 @@
 }
 
 .choiceStyle {
-  width: 56px;
-  height: 56px;
-  margin: 12px auto;
+  width: 28px;
+  height: 28px;
+  margin: 24px auto;
   background: red;
   border-radius: 50%;
 }
