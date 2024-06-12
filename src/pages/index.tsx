@@ -66,13 +66,18 @@ const Home = () => {
       }
     }
     if (pass === 0) {
-      const nextTurnColor = 2 / nowTurnColor;
-      setPassCount((PASS) => PASS + 1);
-      setTurnColor(nextTurnColor);
-      choice(nextTurnColor);
-      if (passCount + 1 >= 2) {
-        alert('ゲーム終了');
-      }
+      setPassCount((prevCount) => {
+        const newPassCount = prevCount + 1;
+        if (newPassCount >= 2) {
+          alert('ゲーム終了');
+          return prevCount;
+        }
+        setTurnColor(2 / nowTurnColor);
+        choice(2 / nowTurnColor);
+        return newPassCount;
+      });
+    } else {
+      setPassCount(0);
     }
   };
 
