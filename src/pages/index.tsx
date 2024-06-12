@@ -94,7 +94,7 @@ const Home = () => {
       }
     }
     setboard(newBoard);
-    choice;
+    choice();
   };
 
   // 各石の数を数える
@@ -117,18 +117,13 @@ const Home = () => {
         {board.map((row, y) =>
           row.map((color, x) => (
             <div className={styles.cellStyle} key={`${x}-${y}`} onClick={() => clickHandler(x, y)}>
-              {color !== 0 && color !== 3 && (
+              {color !== 0 && (
                 <div
-                  className={styles.stoneStyle}
-                  style={{ background: color === 1 ? '#000' : '#fff' }}
+                  className={`${styles.stoneStyle}${color === 3 ? styles.choiceStyle : ''}`}
+                  style={{ background: color === 1 ? '#000' : color === 2 ? '#fff' : '#ff0000' }}
                 />
               )}
-              {color !== 1 && color !== 2 && (
-                <div
-                  className={styles.choiceStyle}
-                  style={{ background: color === 3 ? '#ff0000' : '' }}
-                />
-              )}
+              {color === 3 && <div className={styles.choiceStyle} />}
             </div>
           )),
         )}

@@ -30,10 +30,10 @@
   border-radius: 50%;
 }
 
-.choiseStyle {
+.choiceStyle {
   width: 56px;
   height: 56px;
   margin: 12px auto;
-  background: #fff;
+  background: red;
   border-radius: 50%;
 }
