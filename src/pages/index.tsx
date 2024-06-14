@@ -31,6 +31,7 @@ const Home = () => {
   const [passCount, setPassCount] = useState(0);
   const choice = (nowTurnColor: number) => {
     let pass = 0;
+    const choiceBoard = structuredClone(newBoard);
     for (let y = 0; y < newBoard.length; y++) {
       for (let x = 0; x < newBoard[y].length; x++) {
         if (newBoard[y][x] !== 1 && newBoard[y][x] !== 2) {
@@ -56,15 +57,16 @@ const Home = () => {
             }
           }
           if (choicePrace) {
-            newBoard[y][x] = 3;
+            choiceBoard[y][x] = 3;
             pass++;
           } else {
-            newBoard[y][x] = 0;
+            choiceBoard[y][x] = 0;
             setboard(newBoard);
           }
         }
       }
     }
+    setboard(choiceBoard);
     if (pass === 0) {
       setPassCount((prevCount) => {
         const newPassCount = prevCount + 1;
@@ -72,8 +74,8 @@ const Home = () => {
           alert('ゲーム終了');
           return prevCount;
         }
-        setTurnColor(2 / nowTurnColor);
-        choice(2 / nowTurnColor);
+        setTurnColor(turnColor === 1 ? 2 : 1);
+        choice(turnColor === 1 ? 2 : 1);
         return newPassCount;
       });
     } else {
@@ -106,7 +108,6 @@ const Home = () => {
               changeY += dy;
             }
             newBoard[y][x] = turnColor;
-            setTurnColor(2 / turnColor);
           }
           break;
         } else {
@@ -114,8 +115,8 @@ const Home = () => {
         }
       }
     }
-    setTurnColor(2 / turnColor);
-    choice(2 / turnColor);
+    setTurnColor(turnColor === 1 ? 2 : 1);
+    choice(turnColor === 1 ? 2 : 1);
   };
 
   // 各石の数を数える
